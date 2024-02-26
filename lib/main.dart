@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:learning_bloc/pages/home/view/home_page.dart';
+import 'package:learning_bloc/router/router_setup.dart';
+import 'package:url_strategy/url_strategy.dart';
 
 void main() {
+  setPathUrlStrategy();
+  RouterSetup.setup();
+
   runApp(const LearningBloc());
 }
 
@@ -10,11 +14,11 @@ class LearningBloc extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
       title: 'Learning Bloc',
-      routes: {
-        '/': (context) => const HomePage(),
-      },
+      routerDelegate: RouterSetup.router.routerDelegate,
+      routeInformationParser: RouterSetup.router.routeInformationParser,
+      routeInformationProvider: RouterSetup.router.routeInformationProvider,
     );
   }
 }
